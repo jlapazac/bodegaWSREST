@@ -27,6 +27,10 @@ namespace bodegaWSREST
         bodega ObtenerBodega(string idbodega);
 
         [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "bodegauser/{iduser}", ResponseFormat = WebMessageFormat.Json)]
+        bodega ObtenerBodegaUser(string iduser);
+
+        [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "bodegaproductos/{idbodega}", ResponseFormat = WebMessageFormat.Json)]
         List<BodegaProductos> ObtenerBodegaProductos(string idbodega);
     }

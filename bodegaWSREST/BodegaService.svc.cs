@@ -54,5 +54,13 @@ namespace bodegaWSREST
                         };
             return query.ToList();
         }
+
+        public bodega ObtenerBodegaUser(string iduser)
+        {
+            var query = from bodega in db.bodega.Where(x => (x.iduser == iduser))
+                        select bodega;
+            bodega resultado = query.First();
+            return resultado;
+        }
     }
 }

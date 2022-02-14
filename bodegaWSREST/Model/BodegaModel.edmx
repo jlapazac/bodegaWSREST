@@ -18,6 +18,7 @@
           <Property Name="latitud" Type="float" Nullable="false" />
           <Property Name="longitud" Type="float" Nullable="false" />
           <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="iduser" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="categoria">
           <Key>
@@ -62,6 +63,7 @@
           <Property Name="latitud" Type="Double" Nullable="false" />
           <Property Name="longitud" Type="Double" Nullable="false" />
           <Property Name="activo" Type="Boolean" Nullable="false" />
+          <Property Name="iduser" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="bodegasEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bodega" EntityType="Self.bodega" />
@@ -98,6 +100,7 @@
           <EntitySetMapping Name="bodega">
             <EntityTypeMapping TypeName="bodegasModel.bodega">
               <MappingFragment StoreEntitySet="bodega">
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idbodega" ColumnName="idbodega" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />

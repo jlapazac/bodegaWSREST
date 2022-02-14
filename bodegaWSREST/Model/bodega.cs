@@ -23,5 +23,6 @@ namespace bodegaWSREST.Model
         public double latitud { get; set; }
         public double longitud { get; set; }
         public bool activo { get; set; }
+        public string iduser { get; set; }
     }
 }
