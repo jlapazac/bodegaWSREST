@@ -33,7 +33,7 @@ namespace bodegaWSREST
         {
             var query = from bodega in db.bodega.Where(x => (x.idbodega == idbodega))
                         select bodega;
-            bodega resultado = query.First();
+            bodega resultado = query.FirstOrDefault();
             return resultado;
         }
 
@@ -59,7 +59,7 @@ namespace bodegaWSREST
         {
             var query = from bodega in db.bodega.Where(x => (x.iduser == iduser))
                         select bodega;
-            bodega resultado = query.First();
+            bodega resultado = query.FirstOrDefault();
             return resultado;
         }
     }
