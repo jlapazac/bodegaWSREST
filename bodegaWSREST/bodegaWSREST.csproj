@@ -87,6 +87,7 @@
       <DependentUpon>BodegaService.svc</DependentUpon>
     </Compile>
     <Compile Include="Dominio\BodegaProductos.cs" />
+    <Compile Include="Dominio\DetallePedido.cs" />
     <Compile Include="IBodegaService.cs" />
     <Compile Include="Model\bodega.cs">
       <DependentUpon>BodegaModel.tt</DependentUpon>
@@ -107,6 +108,12 @@
       <DependentUpon>BodegaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\categoria.cs">
+      <DependentUpon>BodegaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\detallepedido.cs">
+      <DependentUpon>BodegaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\pedido.cs">
       <DependentUpon>BodegaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\producto.cs">

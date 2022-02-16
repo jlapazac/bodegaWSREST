@@ -35,5 +35,32 @@ namespace bodegaWSREST
         List<BodegaProductos> ObtenerBodegaProductos(string idbodega);
 
         //A partir de aqui van los metodos pedido
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "pedidos", ResponseFormat = WebMessageFormat.Json)]
+        pedido CrearPedido(pedido pedidoACrear);
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "pedidos /{idpedido}", ResponseFormat = WebMessageFormat.Json)]
+        pedido obtenerPedido(string idpedido);
+
+        [OperationContract]
+        [WebInvoke(Method = "PUT", UriTemplate = "pedidos", ResponseFormat = WebMessageFormat.Json)]
+        pedido ModificarPedido(pedido pedidoAMOdificar);
+
+        //A partir de aqui van los metodos detallePedido
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", UriTemplate = "detallepedidos", ResponseFormat = WebMessageFormat.Json)]
+        detallepedido CrearDetallePedido(detallepedido detallepedidoACrear);
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "detallepedidos /{idpedido}", ResponseFormat = WebMessageFormat.Json)]
+        detallepedido obtenerDetallePedido(string idpedido);
+
+        [OperationContract]
+        [WebInvoke(Method = "PUT", UriTemplate = "detallepedidos", ResponseFormat = WebMessageFormat.Json)]
+        detallepedido ModificarDetallePedido(detallepedido detallepedidoAMOdificar);
+
+
+
+
     }
 }

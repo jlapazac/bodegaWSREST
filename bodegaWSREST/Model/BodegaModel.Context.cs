@@ -28,5 +28,7 @@ namespace bodegaWSREST.Model
         public virtual DbSet<bodega> bodega { get; set; }
         public virtual DbSet<categoria> categoria { get; set; }
         public virtual DbSet<producto> producto { get; set; }
+        public virtual DbSet<detallepedido> detallepedido { get; set; }
+        public virtual DbSet<pedido> pedido { get; set; }
     }
 }
