@@ -12,10 +12,15 @@ namespace bodegaWSREST.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class categoria
+    public partial class pedido
     {
         public int id { get; set; }
-        public string idcategoria { get; set; }
-        public string catgoria { get; set; }
+        public string idpedido { get; set; }
+        public string idcliente { get; set; }
+        public string idbodega { get; set; }
+        public decimal monto { get; set; }
+        public System.DateTime fechaRegistro { get; set; }
+        public System.DateTime fechaEntrega { get; set; }
+        public string estado { get; set; }
     }
 }
