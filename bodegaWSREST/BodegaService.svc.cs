@@ -25,7 +25,7 @@ namespace bodegaWSREST
         {
             db.detallepedido.Add(detallepedidoACrear);
             db.SaveChanges();
-            detallepedido detallepedido = obtenerDetallePedido(detallepedidoACrear.idpedido);
+            detallepedido detallepedido = obtenerDetallePedido(detallepedidoACrear.id.ToString());
             return detallepedido;
         }
 
@@ -49,7 +49,7 @@ namespace bodegaWSREST
         {
             db.Entry(detallepedidoAMOdificar).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            detallepedido detallepedido = obtenerDetallePedido(detallepedidoAMOdificar.idpedido);
+            detallepedido detallepedido = obtenerDetallePedido(detallepedidoAMOdificar.id.ToString());
             return detallepedido;
         }
 
@@ -95,12 +95,28 @@ namespace bodegaWSREST
             return resultado;
         }
 
-        public detallepedido obtenerDetallePedido(string idpedido)
+        public detallepedido obtenerDetallePedido(string id)
         {
-            var query = from detallepedido in db.detallepedido.Where(x => (x.idpedido == idpedido))
+            var query = from detallepedido in db.detallepedido.Where(x => (x.id.ToString() == id))
                         select detallepedido;
             detallepedido resultado = query.FirstOrDefault();
             return resultado;
+        }
+
+        public List<DetallePedido> obtenerDetallePedidoProductos(string idpedido)
+        {
+            var query = from a in db.detallepedido.Where(x => (x.idpedido == idpedido))
+                        join b in db.producto on a.idproducto equals b.idproducto
+                        select new DetallePedido 
+                        {
+                            id = a.id,
+                            idpedido = a.idpedido,
+                            idproducto = a.idproducto,
+                            desproducto = b.nombre,
+                            precio = a.precio,
+                            cantidad = a.cantidad
+                        };
+            return query.ToList();
         }
 
         public pedido obtenerPedido(string idpedido)
@@ -114,20 +130,19 @@ namespace bodegaWSREST
         public List<PedidosCliente> ObtenerPedidoClientes(string idcliente)
         {
             var query = from a in db.pedido.Where(x => (x.idcliente == idcliente))
-                        join b in db.detallepedido on a.idpedido equals b.idpedido
-                        join c in db.bodega on a.idbodega equals c.idbodega
+                        join b in db.bodega on a.idbodega equals b.idbodega
                         select new PedidosCliente
                         {
                             id = a.id,
                             idpedido = a.idpedido,
-                           idcliente = a.idcliente,
-                           idbodega = a.idbodega,
-                           descripcion = a.idbodega,
-                           monto = (double)a.monto,
-                           fechaRegistro = a.fechaRegistro,
-                           fechaEntrega = a.fechaEntrega,
-                           estado = a.estado
-                           };
+                            idcliente = a.idcliente,
+                            idbodega = a.idbodega,
+                            descripcion = b.nombre,
+                            monto = a.monto,
+                            fechaRegistro = a.fechaRegistro,
+                            fechaEntrega = a.fechaEntrega,
+                            estado = a.estado
+                        };
             return query.ToList();
         }
     }

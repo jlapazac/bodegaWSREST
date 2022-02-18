@@ -56,15 +56,15 @@ namespace bodegaWSREST
         detallepedido CrearDetallePedido(detallepedido detallepedidoACrear);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "detallepedidos/{idpedido}", ResponseFormat = WebMessageFormat.Json)]
-        detallepedido obtenerDetallePedido(string idpedido);
+        [WebInvoke(Method = "GET", UriTemplate = "detallepedidos/{id}", ResponseFormat = WebMessageFormat.Json)]
+        detallepedido obtenerDetallePedido(string id);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "detallepedidos", ResponseFormat = WebMessageFormat.Json)]
         detallepedido ModificarDetallePedido(detallepedido detallepedidoAMOdificar);
 
-
-
-
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "detallepedidosproductos/{idpedido}", ResponseFormat = WebMessageFormat.Json)]
+        List<DetallePedido> obtenerDetallePedidoProductos(string idpedido);
     }
 }

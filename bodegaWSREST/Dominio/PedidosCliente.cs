@@ -25,7 +25,7 @@ namespace bodegaWSREST.Dominio
             public string descripcion { get; set; }
 
             [DataMember]
-            public double monto { get; set; }
+            public decimal monto { get; set; }
 
             [DataMember]
             public DateTime fechaRegistro { get; set; }

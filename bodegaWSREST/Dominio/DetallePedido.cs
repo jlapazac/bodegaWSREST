@@ -16,22 +16,15 @@ namespace bodegaWSREST.Dominio
         public string idpedido { get; set; }
 
         [DataMember]
-        public string idcliente { get; set; }
+        public string idproducto { get; set; }
 
         [DataMember]
-        public string idbodega { get; set; }
+        public string desproducto { get; set; }
 
         [DataMember]
-        public double monto { get; set; }
+        public decimal precio { get; set; }
 
         [DataMember]
-        public DateTime fechaRegistro { get; set; }
-
-        [DataMember]
-        public DateTime fechaEntrega { get; set; }
-
-        [DataMember]
-        public bool estado { get; set; }
-
+        public decimal cantidad { get; set; }
     }
 }
