@@ -21,12 +21,44 @@ namespace bodegaWSREST
             return bodega;
         }
 
+        public detallepedido CrearDetallePedido(detallepedido detallepedidoACrear)
+        {
+            db.detallepedido.Add(detallepedidoACrear);
+            db.SaveChanges();
+            detallepedido detallepedido = obtenerDetallePedido(detallepedidoACrear.id.ToString());
+            return detallepedido;
+        }
+
+        public pedido CrearPedido(pedido pedidoACrear)
+        {
+            db.pedido.Add(pedidoACrear);
+            db.SaveChanges();
+            pedido pedido = obtenerPedido(pedidoACrear.idpedido);
+            return pedido;
+        }
+
         public bodega ModificarBodega(bodega bodegaAModificar)
         {
             db.Entry(bodegaAModificar).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             bodega bodega = ObtenerBodega(bodegaAModificar.idbodega);
             return bodega;
+        }
+
+        public detallepedido ModificarDetallePedido(detallepedido detallepedidoAMOdificar)
+        {
+            db.Entry(detallepedidoAMOdificar).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            detallepedido detallepedido = obtenerDetallePedido(detallepedidoAMOdificar.id.ToString());
+            return detallepedido;
+        }
+
+        public pedido ModificarPedido(pedido pedidoAMOdificar)
+        {
+           db.Entry(pedidoAMOdificar).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            pedido pedido = obtenerPedido(pedidoAMOdificar.idpedido);
+            return pedido;
         }
 
         public bodega ObtenerBodega(string idbodega)
@@ -61,6 +93,57 @@ namespace bodegaWSREST
                         select bodega;
             bodega resultado = query.FirstOrDefault();
             return resultado;
+        }
+
+        public detallepedido obtenerDetallePedido(string id)
+        {
+            var query = from detallepedido in db.detallepedido.Where(x => (x.id.ToString() == id))
+                        select detallepedido;
+            detallepedido resultado = query.FirstOrDefault();
+            return resultado;
+        }
+
+        public List<DetallePedido> obtenerDetallePedidoProductos(string idpedido)
+        {
+            var query = from a in db.detallepedido.Where(x => (x.idpedido == idpedido))
+                        join b in db.producto on a.idproducto equals b.idproducto
+                        select new DetallePedido 
+                        {
+                            id = a.id,
+                            idpedido = a.idpedido,
+                            idproducto = a.idproducto,
+                            desproducto = b.nombre,
+                            precio = a.precio,
+                            cantidad = a.cantidad
+                        };
+            return query.ToList();
+        }
+
+        public pedido obtenerPedido(string idpedido)
+        {
+            var query = from pedido in db.pedido.Where(x => (x.idpedido == idpedido))
+                        select pedido;
+                        pedido resultado = query.FirstOrDefault();
+            return resultado;
+        }
+
+        public List<PedidosCliente> ObtenerPedidoClientes(string idcliente)
+        {
+            var query = from a in db.pedido.Where(x => (x.idcliente == idcliente))
+                        join b in db.bodega on a.idbodega equals b.idbodega
+                        select new PedidosCliente
+                        {
+                            id = a.id,
+                            idpedido = a.idpedido,
+                            idcliente = a.idcliente,
+                            idbodega = a.idbodega,
+                            descripcion = b.nombre,
+                            monto = a.monto,
+                            fechaRegistro = a.fechaRegistro,
+                            fechaEntrega = a.fechaEntrega,
+                            estado = a.estado
+                        };
+            return query.ToList();
         }
     }
 }
