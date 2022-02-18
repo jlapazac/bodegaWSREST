@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Dominio\BodegaProductos.cs" />
     <Compile Include="Dominio\DetallePedido.cs" />
+    <Compile Include="Dominio\PedidosCliente.cs" />
     <Compile Include="IBodegaService.cs" />
     <Compile Include="Model\bodega.cs">
       <DependentUpon>BodegaModel.tt</DependentUpon>

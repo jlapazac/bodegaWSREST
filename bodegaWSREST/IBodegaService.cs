@@ -39,8 +39,11 @@ namespace bodegaWSREST
         [WebInvoke(Method = "POST", UriTemplate = "pedidos", ResponseFormat = WebMessageFormat.Json)]
         pedido CrearPedido(pedido pedidoACrear);
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "pedidos /{idpedido}", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "pedidos/{idpedido}", ResponseFormat = WebMessageFormat.Json)]
         pedido obtenerPedido(string idpedido);
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "pedidoscliente/{idcliente}", ResponseFormat = WebMessageFormat.Json)]
+        List<PedidosCliente> ObtenerPedidoClientes(string idcliente);
 
         [OperationContract]
         [WebInvoke(Method = "PUT", UriTemplate = "pedidos", ResponseFormat = WebMessageFormat.Json)]
@@ -51,8 +54,9 @@ namespace bodegaWSREST
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "detallepedidos", ResponseFormat = WebMessageFormat.Json)]
         detallepedido CrearDetallePedido(detallepedido detallepedidoACrear);
+
         [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "detallepedidos /{idpedido}", ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "GET", UriTemplate = "detallepedidos/{idpedido}", ResponseFormat = WebMessageFormat.Json)]
         detallepedido obtenerDetallePedido(string idpedido);
 
         [OperationContract]

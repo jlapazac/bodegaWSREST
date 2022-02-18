@@ -47,7 +47,10 @@ namespace bodegaWSREST
 
         public detallepedido ModificarDetallePedido(detallepedido detallepedidoAMOdificar)
         {
-            throw new NotImplementedException();
+            db.Entry(detallepedidoAMOdificar).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            detallepedido detallepedido = obtenerDetallePedido(detallepedidoAMOdificar.idpedido);
+            return detallepedido;
         }
 
         public pedido ModificarPedido(pedido pedidoAMOdificar)
@@ -106,6 +109,26 @@ namespace bodegaWSREST
                         select pedido;
                         pedido resultado = query.FirstOrDefault();
             return resultado;
+        }
+
+        public List<PedidosCliente> ObtenerPedidoClientes(string idcliente)
+        {
+            var query = from a in db.pedido.Where(x => (x.idcliente == idcliente))
+                        join b in db.detallepedido on a.idpedido equals b.idpedido
+                        join c in db.bodega on a.idbodega equals c.idbodega
+                        select new PedidosCliente
+                        {
+                            id = a.id,
+                            idpedido = a.idpedido,
+                           idcliente = a.idcliente,
+                           idbodega = a.idbodega,
+                           descripcion = a.idbodega,
+                           monto = (double)a.monto,
+                           fechaRegistro = a.fechaRegistro,
+                           fechaEntrega = a.fechaEntrega,
+                           estado = a.estado
+                           };
+            return query.ToList();
         }
     }
 }
